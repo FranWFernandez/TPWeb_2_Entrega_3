@@ -2,8 +2,8 @@
     require_once 'aplicacion/views/api.view.php';
     
     abstract class ApiController {
-        protected $view;
-        private $data;
+        public $view;
+        public $data;
         
         function __construct() {
             $this->view = new ApiView();

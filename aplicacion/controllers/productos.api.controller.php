@@ -9,10 +9,18 @@
             parent::__construct();
             $this->model = new ProductosModel();
         }
+
+        public function getAll(){                  
+            $productos=$this->model->getAll();
+            // var_dump($productos);
+            $this->view->response($productos,200);
+        } 
+
         public function getProductosById($params=null){
             $id=$params[':ID'];
             if (!empty($id)){
                 $producto=$this->model->getItem($id);
+                // var_dump($producto);
                 $this->view->response($producto,200);
             } else {
             

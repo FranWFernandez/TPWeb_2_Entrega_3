@@ -4,7 +4,7 @@ require_once './aplicacion/models/model.php';
 
 class ProductosModel extends DB {
 
-    function getProductos() {
+    function getAll() {
         $query = $this->connect()->prepare('SELECT productos.*, marcas.marca , categorias.categoria 
                                             FROM productos 
                                             INNER JOIN marcas ON productos.id_marca = marcas.id_marca 

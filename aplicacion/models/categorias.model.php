@@ -26,8 +26,4 @@ class CategoriasModel extends DB {
         $query = $this->connect()->prepare('UPDATE categorias SET categoria=? WHERE id_categoria=?');
         $query->execute([$categoria, $id_categoria]);
     }
-    function deleteCategoria($id) {
-        $query = $this->connect()->prepare('DELETE FROM categorias WHERE id_categoria = ?');
-        $query->execute([$id]);
-    }
 }

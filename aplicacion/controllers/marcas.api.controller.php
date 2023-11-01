@@ -19,4 +19,16 @@
                 $this->view->response('no hay marcas con el id='.$id,404);
             }
         }  
+        function CrearMarca($params = null) {
+            $marcas = $this->getData();
+            $marcaName = $marcas->marca;
+
+            if (empty($marcaName)) {
+                $this->view->response("Complete los datos", 400);
+            } else {
+                $id = $this->model->insertMarca($marcaName);
+                $marca = $this->model->getMarcaByID($id);
+                $this->view->response($marca, 201);
+            }
+        }
 }

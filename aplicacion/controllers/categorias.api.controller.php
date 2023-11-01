@@ -19,4 +19,17 @@
                 $this->view->response('no hay categorias con el id='.$id,404);
             }
         }  
+
+        function CrearCategoria($params = null) {
+            $categorias = $this->getData();
+            $categoria = $categorias->marca;
+
+            if (empty($categoria)) {
+                $this->view->response("Complete los datos", 400);
+            } else {
+                $id = $this->model->insertCategoria($categoria);
+                $categoria = $this->model->getCategoriaByID($id);
+                $this->view->response($categoria, 201);
+            }
+        }
 }

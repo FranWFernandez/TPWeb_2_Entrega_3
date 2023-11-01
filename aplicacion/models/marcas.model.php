@@ -22,10 +22,6 @@ class MarcasModel extends DB {
         $query->execute([$marca]);
         return $this->connect()->lastInsertId();
     }
-    function deleteMarca($id) {
-        $query = $this->connect()->prepare('DELETE FROM marcas WHERE id_marca = ?');
-        $query->execute([$id]);
-    }
     function updateMarca($id, $marca) {
         $query = $this->connect()->prepare('UPDATE marcas SET marca=? WHERE id_marca =?');
         $query->execute([$marca, $id]);

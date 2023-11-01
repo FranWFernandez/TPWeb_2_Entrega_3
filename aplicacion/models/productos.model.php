@@ -29,8 +29,4 @@ class ProductosModel extends DB {
         $query = $this->connect()->prepare('UPDATE productos SET Producto=?, Precio=?, Talle=?, id_categoria=?, id_marca=? WHERE id_producto=?');
         $query->execute([$producto, $precio, $talle, $id_categorias, $id_marcas, $id]);
     } 
-    function deleteProducto($id) {
-        $query = $this->connect()->prepare('DELETE FROM productos WHERE id_producto = ?');
-        $query->execute([$id]);
-    }
 }

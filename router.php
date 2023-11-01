@@ -8,21 +8,21 @@
     #                 endpoint          verbo     controller                método
     $router->addRoute('productos',     'GET',    'ProductosApiController', 'get'   );
     $router->addRoute('productos',     'POST',   'ProductosApiController', 'create');
-    $router->addRoute('productos/:ID', 'GET',    'ProductosApiController', 'getProductosById'   );
+    $router->addRoute('productos/:ID', 'GET',    'ProductosApiController', 'getProductosById');
     $router->addRoute('productos/:ID', 'PUT',    'ProductosApiController', 'update');
     $router->addRoute('productos/:ID', 'DELETE', 'ProductosApiController', 'delete');
 
-    $router->addRoute('categorias',     'GET',    'CategoriasApiController', 'get'   );
-    $router->addRoute('categorias',     'POST',   'CategoriasApiController', 'create');
-    $router->addRoute('categorias/:ID', 'GET',    'CategoriasApiController', 'get'   );
-    $router->addRoute('categorias/:ID', 'PUT',    'CategoriasApiController', 'update');
-    $router->addRoute('categorias/:ID', 'DELETE', 'CategoriasApiController', 'delete');
+    // $router->addRoute('categorias',     'GET',    'CategoriasApiController', 'get'   );
+    // $router->addRoute('categorias',     'POST',   'CategoriasApiController', 'create');
+    // $router->addRoute('categorias/:ID', 'GET',    'CategoriasApiController', 'get'   );
+    // $router->addRoute('categorias/:ID', 'PUT',    'CategoriasApiController', 'update');
+    // $router->addRoute('categorias/:ID', 'DELETE', 'CategoriasApiController', 'delete');
 
-    $router->addRoute('marcas',     'POST',   'MarcasApiController', 'create');
-    $router->addRoute('marcas',     'GET',    'MarcasApiController', 'get'   );
-    $router->addRoute('marcas/:ID', 'GET',    'MarcasApiController', 'get'   );
-    $router->addRoute('marcas/:ID', 'PUT',    'MarcasApiController', 'update');
-    $router->addRoute('marcas/:ID', 'DELETE', 'MarcasApiController', 'delete');
+    // $router->addRoute('marcas',     'POST',   'MarcasApiController', 'create');
+    // $router->addRoute('marcas',     'GET',    'MarcasApiController', 'get'   );
+    // $router->addRoute('marcas/:ID', 'GET',    'MarcasApiController', 'get'   );
+    // $router->addRoute('marcas/:ID', 'PUT',    'MarcasApiController', 'update');
+    // $router->addRoute('marcas/:ID', 'DELETE', 'MarcasApiController', 'delete');
     
 
-    $router->route($_GET['resource'], $_SERVER['REQUEST_METHOD']);
+    $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);

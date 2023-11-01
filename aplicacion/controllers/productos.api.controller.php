@@ -8,8 +8,6 @@
         function __construct() {
             parent::__construct();
             $this->model = new ProductosModel();
-            
-
         }
         public function getProductosById($params=null){
             $id=$params[':ID'];

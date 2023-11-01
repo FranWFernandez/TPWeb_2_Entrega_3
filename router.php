@@ -18,8 +18,8 @@
     $router->addRoute('categorias/:ID', 'PUT',    'CategoriasApiController', 'update');
     $router->addRoute('categorias/:ID', 'DELETE', 'CategoriasApiController', 'delete');
 
-    $router->addRoute('marcas',         'POST',   'MarcasApiController', 'create');
     $router->addRoute('marcas',         'GET',    'MarcasApiController', 'get'   );
+    $router->addRoute('marcas',         'POST',   'MarcasApiController', 'create');
     $router->addRoute('marcas/:ID',     'GET',    'MarcasApiController', 'getMarcasById'   );
     $router->addRoute('marcas/:ID',     'PUT',    'MarcasApiController', 'update');
     $router->addRoute('marcas/:ID',     'DELETE', 'MarcasApiController', 'delete');

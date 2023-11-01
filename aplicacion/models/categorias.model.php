@@ -11,7 +11,7 @@ class CategoriasModel extends DB {
 
         return $categorias;
     }
-    function getByCategoria($id_categoria) {
+    function getCategoriaById($id_categoria) {
         $query = $this->connect()->prepare('SELECT * FROM categorias where id_categoria=?');
         $query->execute([$id_categoria]);
         $itemCat = $query->fetchAll(PDO::FETCH_OBJ);

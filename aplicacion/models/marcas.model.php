@@ -11,7 +11,7 @@ class MarcasModel extends DB {
 
         return $marcas;
     }
-    public function getMarcabyID ($id){
+    public function getMarcaByID ($id){
         $query= $this->connect()->prepare('SELECT * FROM marcas WHERE id_marca = ?');
         $query->execute([$id]);
         $Item = $query->fetch(PDO::FETCH_OBJ);

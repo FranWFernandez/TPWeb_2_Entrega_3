@@ -20,5 +20,5 @@
             
                 $this->view->response('no hay productos con el id='.$id,404);
             }
-    }
+        }   
 }

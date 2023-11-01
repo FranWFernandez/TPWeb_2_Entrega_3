@@ -11,8 +11,12 @@ class CategoriasModel extends DB {
 
         return $categorias;
     }
-    
-
+    function getByCategoria($id_categoria) {
+        $query = $this->connect()->prepare('SELECT * FROM categorias where id_categoria=?');
+        $query->execute([$id_categoria]);
+        $itemCat = $query->fetchAll(PDO::FETCH_OBJ);
+        return $itemCat;
+    }
     function insertCategoria($categoria) {
         $query = $this->connect()->prepare('INSERT INTO `categorias` (`categoria`) VALUES(?)');
         $query->execute([$categoria]);
@@ -22,8 +26,6 @@ class CategoriasModel extends DB {
         $query = $this->connect()->prepare('UPDATE categorias SET categoria=? WHERE id_categoria=?');
         $query->execute([$categoria, $id_categoria]);
     }
-
-    
     function deleteCategoria($id) {
         $query = $this->connect()->prepare('DELETE FROM categorias WHERE id_categoria = ?');
         $query->execute([$id]);

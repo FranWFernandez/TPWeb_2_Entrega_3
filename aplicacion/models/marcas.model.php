@@ -3,12 +3,10 @@
 require_once './aplicacion/models/model.php';
 
 class MarcasModel extends DB {
-    function getMarcasNames() {
+    function getAllMarcas() {
         $query = $this->connect()->prepare('SELECT * FROM marcas');
         $query->execute();
-
         $marcas = $query->fetchAll(PDO::FETCH_OBJ);
-
         return $marcas;
     }
     public function getMarcaByID ($id){

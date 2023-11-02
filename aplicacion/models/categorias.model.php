@@ -3,12 +3,10 @@
 require_once './aplicacion/models/model.php';
 
 class CategoriasModel extends DB {
-    function getCategoriasNames() {
+    function getAllCategorias() {
         $query = $this->connect()->prepare('SELECT * FROM categorias');
         $query->execute();
-
         $categorias = $query->fetchAll(PDO::FETCH_OBJ);
-
         return $categorias;
     }
     function getCategoriaById($id_categoria) {

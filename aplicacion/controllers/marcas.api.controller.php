@@ -9,6 +9,10 @@
             parent::__construct();
             $this->model = new MarcasModel();
         }
+        public function getAllMarcas(){
+            $marcas = $this->model->getAllMarcas();
+            $this->view->response($marcas,200);
+        }
         public function getMarcasById($params=null){
             $id=$params[':ID'];
             if (!empty($id)){

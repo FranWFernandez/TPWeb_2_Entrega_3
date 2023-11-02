@@ -4,18 +4,15 @@
 
     class ProductosApiController extends ApiController {
         private $model;
-
         function __construct() {
             parent::__construct();
             $this->model = new ProductosModel();
         }
-
         public function getAll(){                  
             $productos=$this->model->getAll();
             // var_dump($productos);
             $this->view->response($productos,200);
         } 
-
         public function getProductosById($params=null){
             $id=$params[':ID'];
             if (!empty($id)){
@@ -23,7 +20,6 @@
                 // var_dump($producto);
                 $this->view->response($producto,200);
             } else {
-            
                 $this->view->response('no hay productos con el id='.$id,404);
             }
         }   
@@ -43,6 +39,23 @@
                 $producto = $this->model->getItem($id);
                 $this->view->response($producto, 201);
             }
-    
         }
-}
+        function UpdateProducto($params = []){
+            $id = $params[':ID'];
+            $producto = $this->model->getItem($id);
+
+            if ($producto) {
+                $body = $this->getData();
+                $producto = $body->Producto;
+                $precio = $body->Precio;
+                $talle = $body->Talle;
+                $id_categorias = $body->id_categoria;
+                $id_marcas = $body->id_marca;
+                $this->model->updateProducto($id,$producto, $precio, $talle, $id_categorias, $id_marcas);
+
+                $this->view->response('La tarea con id='.$id.' ha sido modificada.', 200);
+            } else {
+                $this->view->response('La tarea con id='.$id.' no existe.', 404);
+            }
+        }
+    }

@@ -9,6 +9,10 @@
             parent::__construct();
             $this->model = new CategoriasModel();
         }
+        public function getAllCategorias(){                  
+            $categorias=$this->model->getAllCategorias();
+            $this->view->response($categorias,200);
+        } 
         public function getCategoriasById($params=null){
             $id=$params[':ID'];
             if (!empty($id)){
@@ -19,7 +23,6 @@
                 $this->view->response('no hay categorias con el id='.$id,404);
             }
         }  
-
         function CrearCategoria($params = null) {
             $categorias = $this->getData();
             $categoria = $categorias->marca;
@@ -32,4 +35,8 @@
                 $this->view->response($categoria, 201);
             }
         }
+        // function UpdateCategoria($params = []) {
+        //     $id = $params[':ID'];
+        // }
+
 }

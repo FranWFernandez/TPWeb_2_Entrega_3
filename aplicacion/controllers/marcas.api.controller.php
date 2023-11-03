@@ -1,19 +1,43 @@
 <?php
     require_once 'aplicacion/controllers/api.controller.php';
     require_once 'aplicacion/models/marcas.model.php';
+    require_once 'aplicacion/models/usuario.model.php';
 
     class MarcasApiController extends ApiController {
         private $model;
-
+        private $autenticarHelper;
         function __construct() {
             parent::__construct();
             $this->model = new MarcasModel();
+            $this->autenticarHelper = new AutenticarHelper();
         }
         public function getAllMarcas(){
+            $user = $this->autenticarHelper->UsuarioActual();
+            if(!$user) {
+                $this->view->response('Unauthorized', 401);
+                return;
+            }
+            if($user->role!='ADMIN') {
+                $this->view->response('Forbidden', 403);
+                return;
+            }
+
+
             $marcas = $this->model->getAllMarcas();
             $this->view->response($marcas,200);
         }
         public function getMarcasById($params=null){
+            $user = $this->autenticarHelper->UsuarioActual();
+            if(!$user) {
+                $this->view->response('Unauthorized', 401);
+                return;
+            }
+            if($user->role!='ADMIN') {
+                $this->view->response('Forbidden', 403);
+                return;
+            }
+
+
             $marca = $this->model->getMarcaByID($params[':ID']);
                 if(!empty($marca)) {
                     if($params[':subrecurso']) {
@@ -31,6 +55,17 @@
                     }   
         }   
         function CrearMarca($params = null) {
+            $user = $this->autenticarHelper->UsuarioActual();
+            if(!$user) {
+                $this->view->response('Unauthorized', 401);
+                return;
+            }
+            if($user->role!='ADMIN') {
+                $this->view->response('Forbidden', 403);
+                return;
+            }
+
+
             $marcas = $this->getData();
             $marcaName = $marcas->marca;
 
@@ -43,6 +78,17 @@
             }
         }
         function UpdateMarca($params = []) {
+            $user = $this->autenticarHelper->UsuarioActual();
+            if(!$user) {
+                $this->view->response('Unauthorized', 401);
+                return;
+            }
+            if($user->role!='ADMIN') {
+                $this->view->response('Forbidden', 403);
+                return;
+            }
+
+            
             $id = $params[':ID'];
             $marca = $this->model->getMarcaByID($id);
 

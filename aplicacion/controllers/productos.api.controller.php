@@ -1,18 +1,43 @@
 <?php
     require_once 'aplicacion/controllers/api.controller.php';
     require_once 'aplicacion/models/productos.model.php';
+    require_once 'aplicacion/models/usuario.model.php';
 
     class ProductosApiController extends ApiController {
         private $model;
+        private $autenticarHelper;
         function __construct() {
             parent::__construct();
             $this->model = new ProductosModel();
+            $this->autenticarHelper = new AutenticarHelper();
         }
-        public function getAllProductos(){                  
+        public function getAllProductos(){     
+            $user = $this->autenticarHelper->UsuarioActual();
+            if(!$user) {
+                $this->view->response('Unauthorized', 401);
+                return;
+            }
+            if($user->role!='ADMIN') {
+                $this->view->response('Forbidden', 403);
+                return;
+            }
+
+
             $productos=$this->model->getAll();
             $this->view->response($productos,200);
         } 
         public function getProductosById($params=null){
+            $user = $this->autenticarHelper->UsuarioActual();
+            if(!$user) {
+                $this->view->response('Unauthorized', 401);
+                return;
+            }
+            if($user->role!='ADMIN') {
+                $this->view->response('Forbidden', 403);
+                return;
+            }
+
+
             $producto = $this->model->getItem($params[':ID']);
                 if(!empty($producto)) {
                     if($params[':subrecurso']) {
@@ -47,6 +72,17 @@
                 }
         }   
         function CrearProducto($params = null) {
+            $user = $this->autenticarHelper->UsuarioActual();
+            if(!$user) {
+                $this->view->response('Unauthorized', 401);
+                return;
+            }
+            if($user->role!='ADMIN') {
+                $this->view->response('Forbidden', 403);
+                return;
+            }
+
+
             $body = $this->getData();
 
             $producto = $body->Producto;
@@ -64,6 +100,17 @@
             }
         }
         function UpdateProducto($params = []){
+            $user = $this->autenticarHelper->UsuarioActual();
+            if(!$user) {
+                $this->view->response('Unauthorized', 401);
+                return;
+            }
+            if($user->role!='ADMIN') {
+                $this->view->response('Forbidden', 403);
+                return;
+            }
+
+            
             $id = $params[':ID'];
             $producto = $this->model->getItem($id);
 

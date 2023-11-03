@@ -24,8 +24,10 @@
     $router->addRoute('marcas',                       'GET',    'MarcasApiController',       'getAllMarcas'      );
     $router->addRoute('marcas',                       'POST',   'MarcasApiController',       'CrearMarca'        );
     $router->addRoute('marcas/:ID',                   'GET',    'MarcasApiController',       'getMarcasById'     );
-    $router->addRoute('marcas/:ID',                   'PUT',    'MarcasApiController',       'UpdateMarca'            );
+    $router->addRoute('marcas/:ID',                   'PUT',    'MarcasApiController',       'UpdateMarca'       );
     $router->addRoute('marcas/:ID/:subrecurso',       'GET',    'MarcasApiController',       'getMarcasById'     );
+
+    $router->addRoute('user/token', 'GET',    'UserApiController', 'getToken'   );
 
 
     $router->route($_GET['resource'], $_SERVER['REQUEST_METHOD']);

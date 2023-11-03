@@ -31,12 +31,14 @@
             $usuariopassword = base64_decode($basic[1]); 
             $usuariopassword = explode(":", $usuariopassword); 
 
-            $usuario = $usuariopassword[0];
+            $email = $usuariopassword[0];
             $password = $usuariopassword[1];
 
-            $usuariodata = [ "name" => $usuario, "id" => 123, "role" => 'ADMIN' ]; // Llamar a la DB
+            $usuariodata = [ "email" => $email, "id" => 1, "role" => 'ADMIN' ]; // Llamar a la DB
 
-            if($usuario == "webadmin@gmail.com" && $password == "admin") {
+            $emailDb= $this->model->getByEmail($email);
+            
+            if($email == "webadmin@gmail.com" && $password == "admin") {
                 // Usuario es válido
                 
                 $token = $this->autenticarHelper->crearToken($usuariodata);

@@ -23,7 +23,7 @@
                                 break;
                         }
                     } else
-                            $this->view->response($categoria, 200);
+                        $this->view->response($categoria, 200);
                 } else {
                         $this->view->response(
                             'La categoria con el id='.$params[':ID'].' no existe.'

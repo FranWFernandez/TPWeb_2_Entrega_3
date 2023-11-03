@@ -27,7 +27,7 @@
     $router->addRoute('marcas/:ID',                   'PUT',    'MarcasApiController',       'UpdateMarca'       );
     $router->addRoute('marcas/:ID/:subrecurso',       'GET',    'MarcasApiController',       'getMarcasById'     );
 
-    $router->addRoute('user/token', 'GET',    'UserApiController', 'getToken'   );
+    $router->addRoute('usuario/token', 'GET',    'UsuarioApiController', 'getToken'   );
 
 
     $router->route($_GET['resource'], $_SERVER['REQUEST_METHOD']);

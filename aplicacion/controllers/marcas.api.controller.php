@@ -1,7 +1,7 @@
 <?php
     require_once 'aplicacion/controllers/api.controller.php';
     require_once 'aplicacion/models/marcas.model.php';
-    require_once 'aplicacion/models/usuario.model.php';
+    require_once 'aplicacion/helpers/autenticar.api.helper.php';
 
     class MarcasApiController extends ApiController {
         private $model;

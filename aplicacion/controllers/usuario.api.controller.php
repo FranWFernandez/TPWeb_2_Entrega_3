@@ -36,7 +36,7 @@
 
             $usuariodata = [ "name" => $usuario, "id" => 123, "role" => 'ADMIN' ]; // Llamar a la DB
 
-            if($usuario == "Nico" && $password == "web") {
+            if($usuario == "webadmin@gmail.com" && $password == "admin") {
                 // Usuario es válido
                 
                 $token = $this->autenticarHelper->crearToken($usuariodata);

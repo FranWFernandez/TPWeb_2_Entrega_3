@@ -42,8 +42,20 @@
                 $this->view->response($categoria, 201);
             }
         }
-        // function UpdateCategoria($params = []) {
-        //     $id = $params[':ID'];
-        // }
+        function UpdateCategoria($params = []) {
+            $id = $params[':ID'];
+            $categoria = $this->model->getCategoriaByID($id);
+
+            if ($categoria) {
+                $body = $this->getData();
+                $categoria = $body->categoria;
+
+                $this->model->updateCategoria($id,$categoria);
+
+                $this->view->response('La producto con id='.$id.' ha sido modificada.', 200);
+            }else {
+                $this->view->response('La producto con id='.$id.' no existe.', 404);
+            }
+        }
 
 }

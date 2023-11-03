@@ -42,4 +42,19 @@
                 $this->view->response($marca, 201);
             }
         }
+        function UpdateMarca($params = []) {
+            $id = $params[':ID'];
+            $marca = $this->model->getMarcaByID($id);
+
+            if ($marca) {
+                $body = $this->getData();
+                $marca = $body->marca;
+
+                $this->model->UpdateMarca($id,$marca);
+
+                $this->view->response('La producto con id='.$id.' ha sido modificada.', 200);
+            }else {
+                $this->view->response('La producto con id='.$id.' no existe.', 404);
+            }
+        }
 }

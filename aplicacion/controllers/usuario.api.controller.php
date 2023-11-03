@@ -36,7 +36,7 @@
 
             $usuariodata = [ "email" => $email, "id" => 1, "role" => 'ADMIN' ]; // Llamar a la DB
 
-            $emailDb= $this->model->getByEmail($email);
+        
             
             if($email == "webadmin@gmail.com" && $password == "admin") {
                 // Usuario es válido

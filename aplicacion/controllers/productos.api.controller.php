@@ -8,20 +8,43 @@
             parent::__construct();
             $this->model = new ProductosModel();
         }
-        public function getAll(){                  
+        public function getAllProductos(){                  
             $productos=$this->model->getAll();
-            // var_dump($productos);
             $this->view->response($productos,200);
         } 
         public function getProductosById($params=null){
-            $id=$params[':ID'];
-            if (!empty($id)){
-                $producto=$this->model->getItem($id);
-                // var_dump($producto);
-                $this->view->response($producto,200);
-            } else {
-                $this->view->response('no hay productos con el id='.$id,404);
-            }
+            $producto = $this->model->getItem($params[':ID']);
+                if(!empty($producto)) {
+                    if($params[':subrecurso']) {
+                        switch ($params[':subrecurso']) {
+                            case 'Producto':
+                                $this->view->response($producto->Producto, 200);
+                                break;
+                            case 'Precio':
+                                $this->view->response($producto->Precio, 200);
+                                break;
+                            case 'Talle':
+                                $this->view->response($producto->Talle, 200);
+                                break;
+                            case 'id_categoria':
+                                $this->view->response($producto->id_categoria, 200);
+                                break;   
+                            case 'id_marca':
+                                $this->view->response($producto->id_marca, 200);
+                                break;
+                            default:
+                            $this->view->response(
+                                'El producto no contiene '.$params[':subrecurso'].'.'
+                                , 404);
+                                break;
+                        }
+                    } else
+                        $this->view->response($producto, 200);
+                } else {
+                    $this->view->response(
+                        'La producto con el id='.$params[':ID'].' no existe.'
+                        , 404);
+                }
         }   
         function CrearProducto($params = null) {
             $body = $this->getData();
@@ -53,9 +76,9 @@
                 $id_marcas = $body->id_marca;
                 $this->model->updateProducto($id,$producto, $precio, $talle, $id_categorias, $id_marcas);
 
-                $this->view->response('La tarea con id='.$id.' ha sido modificada.', 200);
+                $this->view->response('La producto con id='.$id.' ha sido modificada.', 200);
             } else {
-                $this->view->response('La tarea con id='.$id.' no existe.', 404);
+                $this->view->response('La producto con id='.$id.' no existe.', 404);
             }
         }
     }

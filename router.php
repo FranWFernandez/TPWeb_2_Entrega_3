@@ -6,7 +6,7 @@
     $router = new Router();
 
     //                 endpoint           verbo     controller                método
-    $router->addRoute('productos',      'GET',    'ProductosApiController', 'getAll'   );
+    $router->addRoute('productos',      'GET',    'ProductosApiController', 'getAllProductos'   );
     $router->addRoute('productos',      'POST',   'ProductosApiController', 'CrearProducto');
     $router->addRoute('productos/:ID',  'GET',    'ProductosApiController', 'getProductosById');
     $router->addRoute('productos/:ID',  'PUT',    'ProductosApiController', 'UpdateProducto');

@@ -14,18 +14,25 @@
             $this->view->response($categorias,200);
         } 
         public function getCategoriasById($params=null){
-            $id=$params[':ID'];
-            if (!empty($id)){
-                $categoria=$this->model->getCategoriaById($id);
-                $this->view->response($categoria,200);
-            } else {
-            
-                $this->view->response('no hay categorias con el id='.$id,404);
-            }
-        }  
+            $categoria = $this->model->getCategoriaByID($params[':ID']);
+                if(!empty($categoria)) {
+                    if($params[':subrecurso']) {
+                        switch ($params[':subrecurso']) {
+                            case 'categoria':
+                                $this->view->response($categoria->categoria, 200);
+                                break;
+                        }
+                    } else
+                            $this->view->response($categoria, 200);
+                } else {
+                        $this->view->response(
+                            'La categoria con el id='.$params[':ID'].' no existe.'
+                            , 404);
+                }   
+        }    
         function CrearCategoria($params = null) {
             $categorias = $this->getData();
-            $categoria = $categorias->marca;
+            $categoria = $categorias->categoria;
 
             if (empty($categoria)) {
                 $this->view->response("Complete los datos", 400);

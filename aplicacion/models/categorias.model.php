@@ -12,7 +12,7 @@ class CategoriasModel extends DB {
     function getCategoriaById($id_categoria) {
         $query = $this->connect()->prepare('SELECT * FROM categorias where id_categoria=?');
         $query->execute([$id_categoria]);
-        $itemCat = $query->fetchAll(PDO::FETCH_OBJ);
+        $itemCat = $query->fetch(PDO::FETCH_OBJ);
         return $itemCat;
     }
     function insertCategoria($categoria) {

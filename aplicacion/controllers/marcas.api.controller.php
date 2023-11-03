@@ -14,15 +14,22 @@
             $this->view->response($marcas,200);
         }
         public function getMarcasById($params=null){
-            $id=$params[':ID'];
-            if (!empty($id)){
-                $marca=$this->model->getMarcaById($id);
-                $this->view->response($marca,200);
-            } else {
-            
-                $this->view->response('no hay marcas con el id='.$id,404);
-            }
-        }  
+            $marca = $this->model->getMarcaByID($params[':ID']);
+                if(!empty($marca)) {
+                    if($params[':subrecurso']) {
+                        switch ($params[':subrecurso']) {
+                            case 'marca':
+                                $this->view->response($marca->marca, 200);
+                                break;
+                        }
+                    } else
+                            $this->view->response($marca, 200);
+                } else {
+                        $this->view->response(
+                            'La marca con el id='.$params[':ID'].' no existe.'
+                            , 404);
+                    }   
+        }   
         function CrearMarca($params = null) {
             $marcas = $this->getData();
             $marcaName = $marcas->marca;

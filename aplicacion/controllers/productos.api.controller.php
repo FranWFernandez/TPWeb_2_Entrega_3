@@ -12,6 +12,7 @@
             $this->autenticarHelper = new AutenticarHelper();
         }
         public function getAllProductos(){     
+            /*
             $user = $this->autenticarHelper->UsuarioActual();
             if(!$user) {
                 $this->view->response('Unauthorized', 401);
@@ -21,12 +22,14 @@
                 $this->view->response('Forbidden', 403);
                 return;
             }
+            */
 
 
             $productos=$this->model->getAll();
             $this->view->response($productos,200);
         } 
         public function getProductosById($params=null){
+            /*
             $user = $this->autenticarHelper->UsuarioActual();
             if(!$user) {
                 $this->view->response('Unauthorized', 401);
@@ -36,6 +39,7 @@
                 $this->view->response('Forbidden', 403);
                 return;
             }
+            */
 
 
             $producto = $this->model->getItem($params[':ID']);
@@ -72,6 +76,7 @@
                 }
         }   
         function CrearProducto($params = null) {
+            /*
             $user = $this->autenticarHelper->UsuarioActual();
             if(!$user) {
                 $this->view->response('Unauthorized', 401);
@@ -81,6 +86,7 @@
                 $this->view->response('Forbidden', 403);
                 return;
             }
+            */
 
 
             $body = $this->getData();
@@ -100,6 +106,7 @@
             }
         }
         function UpdateProducto($params = []){
+            /*
             $user = $this->autenticarHelper->UsuarioActual();
             if(!$user) {
                 $this->view->response('Unauthorized', 401);
@@ -109,6 +116,7 @@
                 $this->view->response('Forbidden', 403);
                 return;
             }
+            */
 
             
             $id = $params[':ID'];

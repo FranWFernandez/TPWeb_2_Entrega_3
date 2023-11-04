@@ -13,6 +13,7 @@
             $this->autenticarHelper = new AutenticarHelper();
         }
         public function getAllCategorias(){        
+            /*
             $user = $this->autenticarHelper->UsuarioActual();
             if(!$user) {
                 $this->view->response('Unauthorized', 401);
@@ -22,12 +23,13 @@
                 $this->view->response('Forbidden', 403);
                 return;
             }
-            
+            */
             
             $categorias=$this->model->getAllCategorias();
             $this->view->response($categorias,200);
         } 
         public function getCategoriasById($params=null){
+            /*
             $user = $this->autenticarHelper->UsuarioActual();
             if(!$user) {
                 $this->view->response('Unauthorized', 401);
@@ -37,6 +39,7 @@
                 $this->view->response('Forbidden', 403);
                 return;
             }
+            */
 
 
             $categoria = $this->model->getCategoriaByID($params[':ID']);
@@ -56,6 +59,7 @@
                 }   
         }    
         function CrearCategoria($params = null) {
+            /*
             $user = $this->autenticarHelper->UsuarioActual();
             if(!$user) {
                 $this->view->response('Unauthorized', 401);
@@ -65,6 +69,7 @@
                 $this->view->response('Forbidden', 403);
                 return;
             }
+            */
 
 
             $categorias = $this->getData();
@@ -79,6 +84,7 @@
             }
         }
         function UpdateCategoria($params = []) {
+            /*
             $user = $this->autenticarHelper->UsuarioActual();
             if(!$user) {
                 $this->view->response('Unauthorized', 401);
@@ -88,6 +94,7 @@
                 $this->view->response('Forbidden', 403);
                 return;
             }
+            */
 
 
 

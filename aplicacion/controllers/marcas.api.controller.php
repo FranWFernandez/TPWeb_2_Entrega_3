@@ -12,6 +12,7 @@
             $this->autenticarHelper = new AutenticarHelper();
         }
         public function getAllMarcas(){
+            /*
             $user = $this->autenticarHelper->UsuarioActual();
             if(!$user) {
                 $this->view->response('Unauthorized', 401);
@@ -21,12 +22,14 @@
                 $this->view->response('Forbidden', 403);
                 return;
             }
+            */
 
 
             $marcas = $this->model->getAllMarcas();
             $this->view->response($marcas,200);
         }
         public function getMarcasById($params=null){
+            /*
             $user = $this->autenticarHelper->UsuarioActual();
             if(!$user) {
                 $this->view->response('Unauthorized', 401);
@@ -36,6 +39,7 @@
                 $this->view->response('Forbidden', 403);
                 return;
             }
+            */
 
 
             $marca = $this->model->getMarcaByID($params[':ID']);
@@ -55,6 +59,7 @@
                     }   
         }   
         function CrearMarca($params = null) {
+            /*
             $user = $this->autenticarHelper->UsuarioActual();
             if(!$user) {
                 $this->view->response('Unauthorized', 401);
@@ -64,6 +69,7 @@
                 $this->view->response('Forbidden', 403);
                 return;
             }
+            */
 
 
             $marcas = $this->getData();
@@ -78,6 +84,7 @@
             }
         }
         function UpdateMarca($params = []) {
+            /*
             $user = $this->autenticarHelper->UsuarioActual();
             if(!$user) {
                 $this->view->response('Unauthorized', 401);
@@ -87,6 +94,7 @@
                 $this->view->response('Forbidden', 403);
                 return;
             }
+            */
 
             
             $id = $params[':ID'];

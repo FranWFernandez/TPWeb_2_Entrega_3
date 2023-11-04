@@ -37,8 +37,8 @@
             $usuariodata = [ "email" => $email, "id" => 1, "role" => 'ADMIN' ]; // Llamar a la DB
 
         
-            
-            if($email == "webadmin@gmail.com" && $password == "admin") {
+            $usuario = $this->model->getByEmail($email);
+            if(password_verify($password,$usuario->PASSWORD)) {
                 // Usuario es válido
                 
                 $token = $this->autenticarHelper->crearToken($usuariodata);

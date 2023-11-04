@@ -3,11 +3,23 @@
 require_once './aplicacion/models/model.php';
 
 class MarcasModel extends DB {
-    function getAllMarcas() {
-        $query = $this->connect()->prepare('SELECT * FROM marcas');
+    function getAllMarcas($params=null, $getParametro) {
+        $consulta = 'SELECT * FROM marcas';
+        if (!empty($getParametro)){
+            switch ($getParametro) {
+
+                //falta el case de order
+
+                case isset($getParametro['Filtro']) :
+                    $consulta .=' WHERE '.$getParametro['Filtro'];
+                break;
+            }
+        }
+
+        $query = $this->connect()->prepare($consulta);
         $query->execute();
-        $marcas = $query->fetchAll(PDO::FETCH_OBJ);
-        return $marcas;
+        $productos = $query->fetchAll(PDO::FETCH_OBJ);
+        return $productos;
     }
     public function getMarcaByID ($id){
         $query= $this->connect()->prepare('SELECT * FROM marcas WHERE id_marca = ?');

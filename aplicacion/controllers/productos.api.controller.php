@@ -11,7 +11,27 @@
             $this->model = new ProductosModel();
             $this->autenticarHelper = new AutenticarHelper();
         }
-        public function getAllProductos(){     
+
+        public function getOrden(){
+            //para hacer el orden
+            if(isset($_GET['Orden'])){
+                $Orden=$_GET['Orden'];
+                return $Orden;
+            }else{
+                return $Orden='ASC';
+            }
+    
+        }
+        public function setFiltro(){
+            if(isset($_GET['Filtro'])){
+                $campo=$_GET['Filtro'];
+                return $campo;
+            }
+        }
+
+
+
+        public function getAllProductos($params = null){     
             /*
             $user = $this->autenticarHelper->UsuarioActual();
             if(!$user) {
@@ -24,9 +44,20 @@
             }
             */
 
+            $getParametro=[];
+            $filtroWhere=$this->setFiltro();
 
-            $productos=$this->model->getAll();
-            $this->view->response($productos,200);
+            if(!empty($filtroWhere)) {
+                $getParametro['Filtro'] = $filtroWhere;
+            }
+            
+            $productos=$this->model->getAllProductos($params,$getParametro);
+
+            if($productos) {
+                $this->view->response($productos,200);
+            } else {
+                $this->view->response("no existe", 404);
+            }
         } 
         public function getProductosById($params=null){
             /*

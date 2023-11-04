@@ -12,7 +12,16 @@
             $this->model = new CategoriasModel();
             $this->autenticarHelper = new AutenticarHelper();
         }
-        public function getAllCategorias(){        
+
+        public function setFiltro(){
+            if(isset($_GET['Filtro'])){
+                $campo=$_GET['Filtro'];
+                return $campo;
+            }
+        }
+
+
+        public function getAllCategorias($params=null){        
             /*
             $user = $this->autenticarHelper->UsuarioActual();
             if(!$user) {
@@ -24,9 +33,23 @@
                 return;
             }
             */
+            $getParametro=[];
+            $filtroWhere=$this->setFiltro();
+
+            if(!empty($filtroWhere)) {
+                $getParametro['Filtro'] = $filtroWhere;
+            }
             
-            $categorias=$this->model->getAllCategorias();
-            $this->view->response($categorias,200);
+            
+            $categorias=$this->model->getAllCategorias($params,$getParametro);
+
+            if($categorias) {
+                $this->view->response($categorias,200);
+            } else {
+                $this->view->response("no existe", 404);
+            }
+
+
         } 
         public function getCategoriasById($params=null){
             /*

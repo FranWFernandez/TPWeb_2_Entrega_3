@@ -11,7 +11,17 @@
             $this->model = new MarcasModel();
             $this->autenticarHelper = new AutenticarHelper();
         }
-        public function getAllMarcas(){
+
+
+        public function setFiltro(){
+            if(isset($_GET['Filtro'])){
+                $campo=$_GET['Filtro'];
+                return $campo;
+            }
+        }
+
+
+        public function getAllMarcas($params=null){
             /*
             $user = $this->autenticarHelper->UsuarioActual();
             if(!$user) {
@@ -25,8 +35,21 @@
             */
 
 
-            $marcas = $this->model->getAllMarcas();
-            $this->view->response($marcas,200);
+        
+            $getParametro=[];
+            $filtroWhere=$this->setFiltro();
+
+            if(!empty($filtroWhere)) {
+                $getParametro['Filtro'] = $filtroWhere;
+            }
+            
+            $marcas=$this->model->getAllMarcas($params,$getParametro);
+
+            if($marcas) {
+                $this->view->response($marcas,200);
+            } else {
+                $this->view->response("no existe", 404);
+            }
         }
         public function getMarcasById($params=null){
             /*

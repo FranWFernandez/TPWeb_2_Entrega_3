@@ -3,8 +3,21 @@
 require_once './aplicacion/models/model.php';
 
 class CategoriasModel extends DB {
-    function getAllCategorias() {
-        $query = $this->connect()->prepare('SELECT * FROM categorias');
+    function getAllCategorias($params=null, $getParametro) {
+        $consulta = 'SELECT * FROM categorias';
+
+        if (!empty($getParametro)){
+            switch ($getParametro) {
+
+                //falta el case de order
+
+                case isset($getParametro['Filtro']) :
+                    $consulta .=' WHERE '.$getParametro['Filtro'];
+                break;
+            }
+        }
+
+        $query = $this->connect()->prepare($consulta);
         $query->execute();
         $categorias = $query->fetchAll(PDO::FETCH_OBJ);
         return $categorias;

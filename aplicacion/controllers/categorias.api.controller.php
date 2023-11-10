@@ -13,10 +13,24 @@
             $this->autenticarHelper = new AutenticarHelper();
         }
 
+        public function setOrden(){
+            //para hacer el orden
+            if(isset($_GET['Orden'])){
+                $Orden=$_GET['Orden'];
+                return $Orden;
+            }
+    
+        }
         public function setFiltro(){
             if(isset($_GET['Filtro'])){
                 $campo=$_GET['Filtro'];
                 return $campo;
+            }
+        }
+        public function variableOrden(){
+            if(isset($_GET['VariableOrden'])){
+                $variableorden=$_GET['VariableOrden'];
+                return $variableorden;
             }
         }
 
@@ -34,22 +48,27 @@
             }
             */
             $getParametro=[];
-            $filtroWhere=$this->setFiltro();
+            $filtro=$this->setFiltro();
+            $order = $this->setOrden();
+            $variableorden = $this->variableOrden();
 
-            if(!empty($filtroWhere)) {
-                $getParametro['Filtro'] = $filtroWhere;
+            if(!empty($filtro)) {
+                $getParametro['Filtro'] = $filtro;
+            }
+            if(!empty($order)) {
+                $getParametro['Orden'] = $order;
+            }
+            if(!empty($variableorden)) {
+                $getParametro['VariableOrden'] = $variableorden;
             }
             
-            
-            $categorias=$this->model->getAllCategorias($params,$getParametro);
+            $categorias=$this->model->getAllCategorias($getParametro);
 
             if($categorias) {
                 $this->view->response($categorias,200);
             } else {
                 $this->view->response("no existe", 404);
             }
-
-
         } 
         public function getCategoriasById($params=null){
             /*

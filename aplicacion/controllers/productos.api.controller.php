@@ -12,13 +12,11 @@
             $this->autenticarHelper = new AutenticarHelper();
         }
 
-        public function getOrden(){
+        public function setOrden(){
             //para hacer el orden
             if(isset($_GET['Orden'])){
                 $Orden=$_GET['Orden'];
                 return $Orden;
-            }else{
-                return $Orden='ASC';
             }
     
         }
@@ -28,7 +26,12 @@
                 return $campo;
             }
         }
-
+        public function variableOrden(){
+            if(isset($_GET['VariableOrden'])){
+                $variableorden=$_GET['VariableOrden'];
+                return $variableorden;
+            }
+        }
 
 
         public function getAllProductos($params = null){     
@@ -45,13 +48,21 @@
             */
 
             $getParametro=[];
-            $filtroWhere=$this->setFiltro();
+            $filtro=$this->setFiltro();
+            $order = $this->setOrden();
+            $variableorden = $this->variableOrden();
 
-            if(!empty($filtroWhere)) {
-                $getParametro['Filtro'] = $filtroWhere;
+            if(!empty($filtro)) {
+                $getParametro['Filtro'] = $filtro;
             }
-            
-            $productos=$this->model->getAllProductos($params,$getParametro);
+            if(!empty($order)) {
+                $getParametro['Orden'] = $order;
+            }
+            if(!empty($variableorden)) {
+                $getParametro['VariableOrden'] = $variableorden;
+            }
+
+            $productos=$this->model->getAllProductos($getParametro);
 
             if($productos) {
                 $this->view->response($productos,200);

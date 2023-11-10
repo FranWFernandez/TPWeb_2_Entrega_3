@@ -4,17 +4,16 @@ require_once './aplicacion/models/model.php';
 
 class ProductosModel extends DB {
 
-    function getAllProductos($params=null, $getParametro) {
+    function getAllProductos($getParametro) {
         $consulta= 'SELECT productos.*, marcas.marca , categorias.categoria FROM productos INNER JOIN marcas ON productos.id_marca = marcas.id_marca INNER JOIN categorias ON productos.id_categoria = categorias.id_categoria';     
 
-        if (!empty($getParametro)){
-            switch ($getParametro) {
-
-                //falta el case de order
-
-                case isset($getParametro['Filtro']) :
-                    $consulta .=' WHERE '.$getParametro['Filtro'];
-                break;
+        if (!empty($getParametro['Filtro'])){
+            $consulta .=' WHERE '.$getParametro['Filtro'];   
+        }
+        if (!empty($getParametro['VariableOrden'])){
+            $consulta .=' ORDER BY '.$getParametro['VariableOrden'];
+            if (!empty($getParametro['Orden'])) {
+                $consulta .= ' '.$getParametro['Orden'];
             }
         }
 

@@ -3,16 +3,16 @@
 require_once './aplicacion/models/model.php';
 
 class MarcasModel extends DB {
-    function getAllMarcas($params=null, $getParametro) {
+    function getAllMarcas($getParametro) {
         $consulta = 'SELECT * FROM marcas';
-        if (!empty($getParametro)){
-            switch ($getParametro) {
-
-                //falta el case de order
-
-                case isset($getParametro['Filtro']) :
-                    $consulta .=' WHERE '.$getParametro['Filtro'];
-                break;
+        
+        if (!empty($getParametro['Filtro'])){
+            $consulta .=' WHERE '.$getParametro['Filtro'];   
+        }
+        if (!empty($getParametro['VariableOrden'])){
+            $consulta .=' ORDER BY '.$getParametro['VariableOrden'];
+            if (!empty($getParametro['Orden'])) {
+                $consulta .= ' '.$getParametro['Orden'];
             }
         }
 

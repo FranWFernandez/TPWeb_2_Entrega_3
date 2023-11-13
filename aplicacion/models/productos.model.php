@@ -10,8 +10,8 @@ class ProductosModel extends DB {
         if (!empty($getParametro['Filtro'])){
             $consulta .=' WHERE '.$getParametro['Filtro'];   
         }
-        if (!empty($getParametro['VariableOrden'])){
-            $consulta .=' ORDER BY '.$getParametro['VariableOrden'];
+        if (!empty($getParametro['Sort'])){
+            $consulta .=' ORDER BY '.$getParametro['Sort'];
             if (!empty($getParametro['Orden'])) {
                 $consulta .= ' '.$getParametro['Orden'];
             }

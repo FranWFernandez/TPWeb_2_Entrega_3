@@ -28,8 +28,8 @@
             }
         }
         public function variableOrden(){
-            if(isset($_GET['VariableOrden'])){
-                $variableorden=$_GET['VariableOrden'];
+            if(isset($_GET['Sort'])){
+                $variableorden=$_GET['Sort'];
                 return $variableorden;
             }
         }
@@ -62,7 +62,7 @@
                 $getParametro['Orden'] = $order;
             }
             if(!empty($variableorden)) {
-                $getParametro['VariableOrden'] = $variableorden;
+                $getParametro['Sort'] = $variableorden;
             }
             
             $marcas=$this->model->getAllMarcas($getParametro);

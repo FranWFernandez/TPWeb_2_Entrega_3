@@ -113,8 +113,8 @@
 
             $categoria = $this->model->getCategoriaByID($params[':ID']);
                 if(!empty($categoria)) {
-                    if($params[':subrecurso']) {
-                        switch ($params[':subrecurso']) {
+                    if($params[':variable']) {
+                        switch ($params[':variable']) {
                             case 'categoria':
                                 $this->view->response($categoria->categoria, 200);
                                 break;

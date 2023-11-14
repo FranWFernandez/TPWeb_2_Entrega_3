@@ -116,8 +116,8 @@
 
             $marca = $this->model->getMarcaByID($params[':ID']);
                 if(!empty($marca)) {
-                    if($params[':subrecurso']) {
-                        switch ($params[':subrecurso']) {
+                    if($params[':variable']) {
+                        switch ($params[':variable']) {
                             case 'marca':
                                 $this->view->response($marca->marca, 200);
                                 break;

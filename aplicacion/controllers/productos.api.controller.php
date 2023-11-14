@@ -6,11 +6,37 @@
     class ProductosApiController extends ApiController {
         private $model;
         private $autenticarHelper;
+        public $data;
+
         function __construct() {
             parent::__construct();
             $this->model = new ProductosModel();
             $this->autenticarHelper = new AutenticarHelper();
+            $this->data = file_get_contents("php://input");
         }
+        function getLimite(){
+            if (!empty($_GET['Limite'])){
+                $Limite = $_GET['Limite'];
+                $Pagina = $this->getPagina();
+                if (is_numeric($Limite) && $Limite >= 1){
+                    return ' Limite ' . $Limite . $Pagina;
+                }
+                $this->view->response("Parametro incorrecto",404);
+                die();
+            }
+            return " ";
+        }
+    
+        function getPagina(){
+            if (!empty($_GET['Pagina'])){
+                $Pagina = $_GET['Pagina'];
+                if (is_numeric($Pagina) && $Pagina >= 1){
+                    return ' OFFSET '.$Pagina;
+                }
+            }
+            return " ";
+        }
+
 
         public function setOrden(){
             //para hacer el orden
@@ -27,8 +53,8 @@
             }
         }
         public function variableOrden(){
-            if(isset($_GET['Sort'])){
-                $variableorden=$_GET['Sort'];
+            if(isset($_GET['VariableOrden'])){
+                $variableorden=$_GET['VariableOrden'];
                 return $variableorden;
             }
         }
@@ -48,18 +74,22 @@
             */
 
             $getParametro=[];
+            $pagina = $this->getLimite();
             $filtro=$this->setFiltro();
-            $order = $this->setOrden();
+            $orden = $this->setOrden();
             $variableorden = $this->variableOrden();
 
             if(!empty($filtro)) {
                 $getParametro['Filtro'] = $filtro;
             }
-            if(!empty($order)) {
-                $getParametro['Orden'] = $order;
+            if(!empty($orden)) {
+                $getParametro['Orden'] = $orden;
             }
             if(!empty($variableorden)) {
-                $getParametro['Sort'] = $variableorden;
+                $getParametro['VariableOrden'] = $variableorden;
+            }
+            if(!empty($pagina)) {
+                $getParametro['Pagina'] = $pagina;
             }
 
             $productos=$this->model->getAllProductos($getParametro);
@@ -86,8 +116,8 @@
 
             $producto = $this->model->getItem($params[':ID']);
                 if(!empty($producto)) {
-                    if($params[':subrecurso']) {
-                        switch ($params[':subrecurso']) {
+                    if(!empty($params[':variable'])) {
+                        switch ($params[':variable']) {
                             case 'Producto':
                                 $this->view->response($producto->Producto, 200);
                                 break;
@@ -105,7 +135,7 @@
                                 break;
                             default:
                             $this->view->response(
-                                'El producto no contiene '.$params[':subrecurso'].'.'
+                                'El producto no contiene '.$params[':variable'].'.'
                                 , 404);
                                 break;
                         }

@@ -14,19 +14,19 @@
     $router->addRoute('productos',                    'POST',   'ProductosApiController',    'CrearProducto'      );
     $router->addRoute('productos/:ID',                'GET',    'ProductosApiController',    'getProductosById'   );
     $router->addRoute('productos/:ID',                'PUT',    'ProductosApiController',    'UpdateProducto'     );
-    $router->addRoute('productos/:ID/:subrecurso',    'GET',    'ProductosApiController',    'getProductosById'   );
+    $router->addRoute('productos/:ID/:variable',    'GET',    'ProductosApiController',    'getProductosById'   );
 
     $router->addRoute('categorias',                   'GET',    'CategoriasApiController',   'getAllCategorias'   );
     $router->addRoute('categorias',                   'POST',   'CategoriasApiController',   'CrearCategoria'     );
     $router->addRoute('categorias/:ID',               'GET',    'CategoriasApiController',   'getCategoriasById'  );
     $router->addRoute('categorias/:ID',               'PUT',    'CategoriasApiController',   'UpdateCategoria'    );
-    $router->addRoute('categorias/:ID/:subrecurso',   'GET',    'CategoriasApiController',   'getCategoriasById'  );
+    $router->addRoute('categorias/:ID/:variable',   'GET',    'CategoriasApiController',   'getCategoriasById'  );
 
     $router->addRoute('marcas',                       'GET',    'MarcasApiController',       'getAllMarcas'      );
     $router->addRoute('marcas',                       'POST',   'MarcasApiController',       'CrearMarca'        );
     $router->addRoute('marcas/:ID',                   'GET',    'MarcasApiController',       'getMarcasById'     );
     $router->addRoute('marcas/:ID',                   'PUT',    'MarcasApiController',       'UpdateMarca'       );
-    $router->addRoute('marcas/:ID/:subrecurso',       'GET',    'MarcasApiController',       'getMarcasById'     );
+    $router->addRoute('marcas/:ID/:variable',       'GET',    'MarcasApiController',       'getMarcasById'     );
 
     $router->addRoute('usuario/token',                'GET',    'UsuarioApiController',      'getToken'   );
 

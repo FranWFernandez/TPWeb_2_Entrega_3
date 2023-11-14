@@ -9,11 +9,14 @@ class CategoriasModel extends DB {
         if (!empty($getParametro['Filtro'])){
             $consulta .=' WHERE '.$getParametro['Filtro'];   
         }
-        if (!empty($getParametro['Sort'])){
-            $consulta .=' ORDER BY '.$getParametro['Sort'];
+        if (!empty($getParametro['VariableOrden'])){
+            $consulta .=' ORDER BY '.$getParametro['VariableOrden'];
             if (!empty($getParametro['Orden'])) {
                 $consulta .= ' '.$getParametro['Orden'];
             }
+        }
+        if (!empty($getParametro['Pagina'])){
+            $consulta .=$getParametro['Pagina'];   
         }
 
         $query = $this->connect()->prepare($consulta);
